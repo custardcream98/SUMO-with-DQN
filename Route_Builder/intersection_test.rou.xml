@@ -1,0 +1,5 @@
+<routes>
+	<vType id="Krauss" sigma="1" type="passenger" />
+	<vType carFollowModel="CACC" color="255,20,20" id="CACC" type="passenger" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE5" id="HV01" probability="0.3" to="gneE7" type="Krauss" />
+</routes>

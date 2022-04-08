@@ -1,0 +1,13 @@
+<routes>
+   <vType id="Krauss" type="passenger" sigma="1"/>
+   <vType id="CACC" type="passenger" length="5" color="255,20,20" carFollowModel="CACC"/>
+   
+   <flow id="HV01" type="Krauss" begin="0" end="3600" probability="0.022" from="-gneE5" to="gneE7" departLane="best" />
+   <flow id="HV03" type="Krauss" begin="0" end="3600" probability="0.023" from="-gneE6" to="gneE5" departLane="best" />
+   <flow id="HV02" type="Krauss" begin="0" end="3600" probability="0.022" from="-gneE5" to="gneE4" departLane="best" />
+   <flow id="HV04" type="Krauss" begin="0" end="3600" probability="0.146" from="-gneE6" to="gneE4" departLane="best" />
+   <flow id="HV05" type="Krauss" begin="0" end="3600" probability="0.012" from="-gneE7" to="gneE6" departLane="best" />
+   <flow id="HV06" type="Krauss" begin="0" end="3600" probability="0.023" from="-gneE7" to="gneE5" departLane="best" />
+   <flow id="HV07" type="Krauss" begin="0" end="3600" probability="0.013" from="-gneE4" to="gneE7" departLane="best" />
+   <flow id="HV08" type="Krauss" begin="0" end="3600" probability="0.144" from="-gneE4" to="gneE6" departLane="best" />
+</routes>

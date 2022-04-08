@@ -1,4 +1,4 @@
-import os, sys, gym, gym.spaces, numpy as np
+import os, sys, pathlib, gym, gym.spaces, numpy as np
 
 # SUMO 환경변수 경로 설정
 if 'SUMO_HOME' in os.environ:
@@ -15,10 +15,10 @@ class SumoEnvironment(gym.Env):
         # 시뮬레이션 max step 및 시나리오(네트워크, 교통량) 파일 명시
         self.sim_max_time = 3600
         self.net_file = "intersection.net.xml"
-        self.route_file = "intersection.rou.xml"
+        self.route_file =  "intersection.rou.xml"
 
         # SUMO 실행 - 상태 및 행동에 대한 초기화 목적  
-        runSUMO = ["sumo", "-n",  self.net_file, '-r', self.route_file, '--random', '--quit-on-end', "--start"]
+        runSUMO = ["sumo", "-n",  self.net_file, '-r', self.route_file, '--random', '--quit-on-end', "--no-warnings", "--start"]
         traci.start(runSUMO)
         
         # 상태: 모델로의 입력값 (실시간 교통상황 묘사)
@@ -60,6 +60,9 @@ class SumoEnvironment(gym.Env):
         self.throughput = 0
         self.cum_throughput = 0
 
+        # rat 
+        self.train_batch_size = 3600
+        
         traci.close()
 
     def reset(self): # 에피소드 초기화 메소드
@@ -80,7 +83,7 @@ class SumoEnvironment(gym.Env):
         self.curPhaseDuration = 1
 
         # 시뮬레이션 재시작 및 traci 인터페이스 활성화
-        runSUMO = ["sumo-gui", "-n",  self.net_file, '-r', self.route_file, '--random', '--quit-on-end', "--start"]
+        runSUMO = ["sumo", "-n",  self.net_file, '-r', self.route_file, '--random', '--quit-on-end', "--no-step-log", "--duration-log.disable", "--no-warnings", "--start"]
         traci.start(runSUMO)
 
         # 상태(초깃값) 리턴
@@ -97,7 +100,7 @@ class SumoEnvironment(gym.Env):
             done = False
         else:
             done = True
-            print(self.moe)        
+            # print(self.moe)        
             traci.close()
 
         info = {}
