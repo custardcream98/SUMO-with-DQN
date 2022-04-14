@@ -11,7 +11,7 @@ trainer = dqn.DQNTrainer(env=SumoEnvironment)
 
 episode_reward_mean = 0
 
-for i in range(10):
+for i in range(30):
     result = trainer.train()
 
     # if i % 4 == 0 and i != 0:
