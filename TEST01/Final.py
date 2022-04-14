@@ -1,5 +1,4 @@
-import os, sys, gym, gym.spaces, numpy as np, csv
-import route_builder
+import os, sys, gym, gym.spaces, numpy as np
 
 # SUMO 환경변수 경로 설정
 if 'SUMO_HOME' in os.environ:
@@ -11,41 +10,12 @@ else:
 # traci - SUMO 신호 제어 python 인터페이스     
 import traci
 
-HEADERS = ['step']
-header_temp = [
-    'sortedCarList',
-    'queueLength',
-    'totalWaitingTime',
-    'avgSpeed',
-    'avgGapSpace',
-]
-STRAIGHT = 'straight_'
-RIGHT = 'right_'
-STRAIGHT_OR_RIGHT = [STRAIGHT, RIGHT]
-HAT = '_hat'
-
-for direction in STRAIGHT_OR_RIGHT:
-    for header in header_temp:
-        header = direction + header
-        HEADERS.append(header)
-        HEADERS.append(header + HAT)
-
 class SumoEnvironment(gym.Env):
     def __init__(self, env_config):
-        # result 헤더 입력
-        with open('result.csv', 'w', newline='', encoding='utf-8') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=HEADERS)
-            writer.writeheader()
-
-        # 일반차량, 자율주행차량 비율 결정하여 intersection.rou.xml 생성
-        route_build_class = route_builder.RouteFile()
-        route_build_class.HDV_CAV_RATIO = [0.2, 0.8]
-        route_build_class.createRouteFile()
-
         # 시뮬레이션 max step 및 시나리오(네트워크, 교통량) 파일 명시
-        self.sim_max_time = 28800
-        self.net_file = "intersection.net.xml"
-        self.route_file = "intersection.rou.xml"
+        self.sim_max_time = 3600
+        self.net_file = "simple/intersection.net.xml"
+        self.route_file = "simple/intersection_av80.rou.xml"
 
         # SUMO 실행 - 상태 및 행동에 대한 초기화 목적  
         runSUMO = ["sumo", "-n",  self.net_file, '-r', self.route_file, '--random', '--quit-on-end', "--start"]
@@ -91,9 +61,6 @@ class SumoEnvironment(gym.Env):
         self.cum_throughput = 0
         traci.close()
 
-        # 예측치 관측치 저장용
-        self.result_by_lanes = []
-
     def reset(self): # 에피소드 초기화 메소드
         # traci 인터페이스 종료
         if traci.isLoaded():
@@ -133,10 +100,6 @@ class SumoEnvironment(gym.Env):
             done = True
             print(self.moe)        
             traci.close()
-
-            with open('result.csv', 'a', newline='', encoding='utf-8') as csvfile:
-                writer = csv.DictWriter(csvfile, fieldnames=HEADERS)
-                writer.writerows(self.result_by_lanes)
 
         info = {}
         return state, reward, done, info
@@ -316,25 +279,6 @@ class SumoEnvironment(gym.Env):
         # 관측값과 추정값을 저장하는 코드 부탁쓰
         # 가로축
         # traci.simulation.getTime()
-
-        result_currentstep = {}
-
-        ## 관측값 저장 전 init
-        for header in HEADERS:
-            if header == 'step':
-                result_currentstep[header] = traci.simulation.getTime()
-            else:
-                result_currentstep[header] = 0
-
-        ## 저장
-        for lane_ID in self.incomingLanes:
-            for i in range(0, 5):
-                header = (STRAIGHT if lane_ID.split('_')[1] == '0' else RIGHT) + header_temp[i]
-                result_currentstep[header] += self.incomingLanes[lane_ID][2*i]
-                result_currentstep[header+HAT] += self.incomingLanes[lane_ID][2*i + 1]
-
-        self.result_by_lanes.append(result_currentstep)
-
 
         state = state + waitingTimeArray + vehicleCountArray
         return np.array(state)
