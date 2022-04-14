@@ -1,5 +1,5 @@
-from email import header
 import os, sys, gym, gym.spaces, numpy as np, csv
+import route_builder
 
 # SUMO 환경변수 경로 설정
 if 'SUMO_HOME' in os.environ:
@@ -11,6 +11,7 @@ else:
 # traci - SUMO 신호 제어 python 인터페이스     
 import traci
 
+HEADERS = ['step']
 header_temp = [
     'sortedCarList',
     'queueLength',
@@ -18,7 +19,6 @@ header_temp = [
     'avgSpeed',
     'avgGapSpace',
 ]
-HEADERS = ['step']
 STRAIGHT = 'straight_'
 RIGHT = 'right_'
 STRAIGHT_OR_RIGHT = [STRAIGHT, RIGHT]
@@ -32,8 +32,18 @@ for direction in STRAIGHT_OR_RIGHT:
 
 class SumoEnvironment(gym.Env):
     def __init__(self, env_config):
+        # result 헤더 입력
+        with open('result.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=HEADERS)
+            writer.writeheader()
+
+        # 일반차량, 자율주행차량 비율 결정하여 intersection.rou.xml 생성
+        route_build_class = route_builder.RouteFile()
+        route_build_class.HDV_CAV_RATIO = [0.2, 0.8]
+        route_build_class.createRouteFile()
+
         # 시뮬레이션 max step 및 시나리오(네트워크, 교통량) 파일 명시
-        self.sim_max_time = 3600
+        self.sim_max_time = 28800
         self.net_file = "intersection.net.xml"
         self.route_file = "intersection.rou.xml"
 
@@ -124,9 +134,8 @@ class SumoEnvironment(gym.Env):
             print(self.moe)        
             traci.close()
 
-            with open('result.csv', 'w') as csvfile:
+            with open('result.csv', 'a', newline='', encoding='utf-8') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=HEADERS)
-                writer.writeheader()
                 writer.writerows(self.result_by_lanes)
 
         info = {}
@@ -262,7 +271,7 @@ class SumoEnvironment(gym.Env):
                             waitingTime = carState[1]
                             speed = carState[2]
                             self.incomingLanes[target_lane][11][right_leader] = (position, waitingTime, speed, 'hv')
-            # print()
+            print()
         
         # 차로별 추정값 계산
         for lane_ID in self.incomingLanes:
@@ -313,7 +322,7 @@ class SumoEnvironment(gym.Env):
         ## 관측값 저장 전 init
         for header in HEADERS:
             if header == 'step':
-                result_currentstep[header] = int(traci.simulation.getTime())
+                result_currentstep[header] = traci.simulation.getTime()
             else:
                 result_currentstep[header] = 0
 
