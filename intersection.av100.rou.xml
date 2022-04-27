@@ -1,0 +1,52 @@
+<routes>
+	<vType id="Krauss" sigma="1" type="passenger" />
+	<vType carFollowModel="CACC" color="255,20,20" id="CACC" type="passenger" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE6" id="AV001" probability="0.12" to="gneE4" type="CACC" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE4" id="AV002" probability="0.12" to="gneE6" type="CACC" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE6" id="AV003" probability="0.012" to="gneE5" type="CACC" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE4" id="AV004" probability="0.012" to="gneE7" type="CACC" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE5" id="AV005" probability="0.072" to="gneE7" type="CACC" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE7" id="AV006" probability="0.072" to="gneE5" type="CACC" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE5" id="AV007" probability="0.0144" to="gneE4" type="CACC" />
+	<flow begin="0" departLane="best" end="1800" from="-gneE7" id="AV008" probability="0.0144" to="gneE6" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE6" id="AV009" probability="0.12" to="gneE4" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE4" id="AV010" probability="0.12" to="gneE6" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE6" id="AV011" probability="0.024" to="gneE5" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE4" id="AV012" probability="0.024" to="gneE7" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE5" id="AV013" probability="0.072" to="gneE7" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE7" id="AV014" probability="0.072" to="gneE5" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE5" id="AV015" probability="0.0072" to="gneE4" type="CACC" />
+	<flow begin="1801" departLane="best" end="3600" from="-gneE7" id="AV016" probability="0.0072" to="gneE6" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE6" id="AV017" probability="0.096" to="gneE4" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE4" id="AV018" probability="0.096" to="gneE6" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE6" id="AV019" probability="0.0096" to="gneE5" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE4" id="AV020" probability="0.0096" to="gneE7" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE5" id="AV021" probability="0.096" to="gneE7" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE7" id="AV022" probability="0.096" to="gneE5" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE5" id="AV023" probability="0.0192" to="gneE4" type="CACC" />
+	<flow begin="3601" departLane="best" end="5400" from="-gneE7" id="AV024" probability="0.0192" to="gneE6" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE6" id="AV025" probability="0.096" to="gneE4" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE4" id="AV026" probability="0.096" to="gneE6" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE6" id="AV027" probability="0.0192" to="gneE5" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE4" id="AV028" probability="0.0192" to="gneE7" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE5" id="AV029" probability="0.096" to="gneE7" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE7" id="AV030" probability="0.096" to="gneE5" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE5" id="AV031" probability="0.0096" to="gneE4" type="CACC" />
+	<flow begin="5401" departLane="best" end="7200" from="-gneE7" id="AV032" probability="0.0096" to="gneE6" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE6" id="AV033" probability="0.072" to="gneE4" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE4" id="AV034" probability="0.072" to="gneE6" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE6" id="AV035" probability="0.0072" to="gneE5" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE4" id="AV036" probability="0.0072" to="gneE7" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE5" id="AV037" probability="0.12" to="gneE7" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE7" id="AV038" probability="0.12" to="gneE5" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE5" id="AV039" probability="0.024" to="gneE4" type="CACC" />
+	<flow begin="7201" departLane="best" end="9000" from="-gneE7" id="AV040" probability="0.024" to="gneE6" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE6" id="AV041" probability="0.0072" to="gneE4" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE4" id="AV042" probability="0.0072" to="gneE6" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE6" id="AV043" probability="0.0144" to="gneE5" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE4" id="AV044" probability="0.0144" to="gneE7" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE5" id="AV045" probability="0.12" to="gneE7" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE7" id="AV046" probability="0.12" to="gneE5" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE5" id="AV047" probability="0.012" to="gneE4" type="CACC" />
+	<flow begin="9001" departLane="best" end="10800" from="-gneE7" id="AV048" probability="0.012" to="gneE6" type="CACC" />
+</routes>

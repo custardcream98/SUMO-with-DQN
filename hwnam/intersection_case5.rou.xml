@@ -1,0 +1,12 @@
+<routes>
+	<vType id="Krauss" sigma="1" type="passenger" />
+	<vType carFollowModel="CACC" color="255,20,20" id="CACC" type="passenger" />
+	<flow departLane="best" from="-gneE6" id="AV001" number="360" probability="0.1" to="gneE4" type="CACC" /> 
+	<flow departLane="best" from="-gneE4" id="AV002" number="360" probability="0.1" to="gneE6" type="CACC" />
+	<flow departLane="best" from="-gneE6" id="AV003" number="72" probability="0.02" to="gneE5" type="CACC" />
+	<flow departLane="best" from="-gneE4" id="AV004" number="72" probability="0.02" to="gneE7" type="CACC" />
+	<flow departLane="best" from="-gneE5" id="AV005" number="360" probability="0.1" to="gneE7" type="CACC" />
+	<flow departLane="best" from="-gneE7" id="AV006" number="360" probability="0.1" to="gneE5" type="CACC" />
+	<flow departLane="best" from="-gneE5" id="AV007" number="36" probability="0.01" to="gneE4" type="CACC" />
+	<flow departLane="best" from="-gneE7" id="AV008" number="36" probability="0.01" to="gneE6" type="CACC" />
+</routes>
